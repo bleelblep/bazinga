@@ -7,13 +7,14 @@
 <meta name="description" content="Plugins coming to Bazinga Plugins, and voting on which comes first.">
 <style>
   ul { list-style: none; padding: 0; }
+  li small.note { display: block; }
   li { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; margin-bottom: .5em; }
   button { flex: none; min-width: 6.5em; }
 </style>
 </head>
 <body>
 
-<nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <b>Coming next</b> · <a href="requests.html">Request a feature</a></nav>
+<nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <b>Coming next</b> · <a href="requests.html">Bugs &amp; requests</a></nav>
 
 <h1>Coming next</h1>
 
@@ -21,26 +22,36 @@
 <p><b>Votes decide batch three.</b> Batches one and two are already out.</p>
 <p><small>Sort: <a href="#" id="by-votes">most votes</a> · <a href="#" id="by-name">A–Z</a></small></p>
 
-<ul id="list">
+<ul id="list" class="votes">
   <li data-id="ansi-colours"><b>ANSI Colours</b> · shows colours in ANSI code blocks the way desktop Discord does <small>(Android only)</small></li>
   <li data-id="ghost-log-ng"><b>Ghost Log Next Gen</b> · a deleted-message log with edit history and saved media, encrypted on your phone <small>(Android only)</small></li>
   <li data-id="multi-scrobbler"><b>Multi Scrobbler</b> · your Last.fm, Libre.fm or ListenBrainz listening status on your profile (an update of kmmiio99o's)</li>
   <li data-id="picture-links"><b>Picture Links</b> · tap profile pictures and banners to view them full size, with save and share</li>
   <li data-id="plugin-hub"><b>Plugin Hub</b> · a section in Discord's settings with shortcuts to the plugins you choose</li>
+  <li data-id="relationship-notifier"><b>Relationship Notifier</b> · tells you when you lose a friend, a mutual server or a group DM <small class="note">Not ported yet: it needs a full rewrite for Valenced, so it will take longer than the others.</small></li>
   <li data-id="screenshot-redactor"><b>Screenshot Redactor</b> · swaps names, avatars and personal details for placeholders so chats are safe to screenshot</li>
   <li data-id="speech-bubbles"><b>Speech Bubbles</b> · chat as speech bubbles: yours on the right, theirs on the left, with tails, tap for the time and a typing bubble <small>(Android only)</small></li>
+  <li data-id="shimeji"><b>Shimeji</b> · a pet that lives on top of Discord: a unicorn, Nyan Cat, Gary the Snail, a cat or a dog <small>(Android only)</small></li>
   <li data-id="sekai-stickers"><b>Sekai Stickers</b> · make Project Sekai stickers from a new tab in the emoji, GIF and sticker picker <small>(Android only)</small></li>
   <li data-id="translate"><b>Translate</b> · translate messages in place with a long-press, using free services, no key or account</li>
   <li data-id="ui-tweaks"><b>UI Tweaks</b> · hide parts of the long-press menu, settings and emoji picker; choose what double-tap and swipes do <small>(Android only)</small></li>
   <li data-id="veil"><b>Veil</b> · blur messages from chosen people, channels or keywords like spoilers, and tap to reveal</li>
   <li data-id="screen-effects"><b>VFX</b> · tap effects, screen filters like CRT and VHS, typing sparks and /fx messages <small>(Android only)</small></li>
 </ul>
-<p><small>AI Core and the plugins that need it are left out for now: they'd all have to come at once, and I can only focus on one thing at a time.</small></p>
+
+<h2>AI Core and the plugins that need it</h2>
+<p><small>These would all have to come at once, and I can only focus on one thing at a time, so they're one vote between them. None of them works without AI Core. Android only.</small></p>
+<ul id="ai-list" class="votes">
+  <li data-id="ai-core"><b>AI Core</b> · one shared AI key, spending cap and request queue for the plugins below; does nothing on its own
+    <small class="note">With it: <b>Ask AI</b> (ask anything with /ai, answered only to you) · <b>Catch Up</b> (/catchup for a short summary of what you missed) · <b>TL;DR</b> (long-press a long message for a short summary only you can see)</small></li>
+</ul>
 
 <script>
   const API = "https://votes.bleel.workers.dev";
   const list = document.getElementById("list");
   const items = [...list.children];
+  // Every votable row, AI Core's group included; only the main list is sorted
+  const rows = [...document.querySelectorAll("ul.votes > li")];
   let counts = {};
 
   // Which plugins this browser already voted for (just to grey out the button)
@@ -52,7 +63,7 @@
   };
 
   // Text on the left, vote button in the same spot on the right of every row
-  for (const li of items) {
+  for (const li of rows) {
     const text = document.createElement("span");
     text.append(...li.childNodes);
     const button = document.createElement("button");
@@ -62,7 +73,7 @@
   }
 
   function render() {
-    for (const li of items) {
+    for (const li of rows) {
       const button = li.querySelector("button");
       const n = counts[li.dataset.id] || 0;
       const done = mine.includes(li.dataset.id);

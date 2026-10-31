@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Request a Feature · Bazinga</title>
-<meta name="description" content="Ask for something in one of the Bazinga plugins.">
+<title>Report a Bug or Request a Feature · Bazinga</title>
+<meta name="description" content="Report a bug or ask for something new in one of the Bazinga plugins.">
 <style>
   label { display: block; margin-top: 1em; }
   select, textarea, input { display: block; width: 100%; max-width: 32em; margin-top: .3em; font: inherit; }
@@ -12,16 +12,27 @@
   button { margin-top: 1em; font: inherit; }
   #done, #error { margin-top: 1em; }
   #error { color: #b00020; }
+  fieldset { border: none; padding: 0; margin: 1em 0 0; }
+  fieldset label { display: inline; margin: 0 1.5em 0 .3em; }
+  fieldset input { display: inline; width: auto; }
+  .hint { display: block; color: #666; }
+  #logs { font-family: monospace; font-size: .9em; }
 </style>
 </head>
 <body>
 
-<nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <a href="coming.html">Coming next</a> · <b>Request a feature</b></nav>
+<nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <a href="coming.html">Coming next</a> · <b>Bugs &amp; requests</b></nav>
 
-<h1>Request a feature</h1>
-<p>Something one of the plugins should do, or do differently. Pick the plugin, say what you want, and it lands with me. No sign-in; up to five requests a day.</p>
+<h1>Report a bug or request a feature</h1>
+<p>Something broken in one of the plugins, or something it should do. Pick the plugin, tell me about it, and it lands with me. No sign-in; up to five a day.</p>
 
 <form id="form">
+  <fieldset>
+    <legend>What is it?</legend>
+    <input type="radio" name="kind" id="kind-bug" value="bug" required><label for="kind-bug">Something's broken</label>
+    <input type="radio" name="kind" id="kind-request" value="request"><label for="kind-request">Something new</label>
+  </fieldset>
+
   <label>Plugin
     <select id="plugin" required>
       <option value="" disabled selected>Pick one</option>
@@ -41,24 +52,48 @@
         <option value="pocket-browser">Pocket Browser</option>
         <option value="char-counter">Character Counter</option>
       </optgroup>
+      <optgroup label="In community review">
+        <option value="show-tag">Show Tag</option>
+        <option value="pronouns">Pronouns</option>
+        <option value="hide-call-buttons">Hide Call Buttons</option>
+        <option value="staff-tags">Staff Tags</option>
+        <option value="live-markdown">Live Markdown</option>
+      </optgroup>
     </select>
   </label>
   <small id="count"></small>
 
-  <label>What should it do?
+  <label><span id="text-label">What should it do?</span>
     <textarea id="text" required minlength="10" maxlength="1000" placeholder="What you want, and when you'd use it. A sentence or two is plenty."></textarea>
   </label>
+
+  <div id="bug-fields" hidden>
+    <label>Android version
+      <input id="android" type="text" maxlength="32" placeholder="e.g. Android 15" autocomplete="off">
+    </label>
+    <label>Discord and Valenced versions <small>(optional)</small>
+      <input id="app" type="text" maxlength="64" placeholder="e.g. Discord 352.6, Valenced 1.2.4" autocomplete="off">
+      <small class="hint">Both are shown in Discord under Settings → Valenced.</small>
+    </label>
+    <label>Plugin version <small>(optional)</small>
+      <input id="version" type="text" maxlength="32" placeholder="e.g. 1.3.9" autocomplete="off">
+    </label>
+    <label>Logs <small>(optional, but they help a lot)</small>
+      <textarea id="logs" maxlength="8000" placeholder="Paste the lines from around when it went wrong."></textarea>
+      <small class="hint">In Discord: Settings → Valenced → Developer → Debug Logs. Check them for anything private, like names or messages, before you send.</small>
+    </label>
+  </div>
 
   <label>Discord username <small>(optional, so I can ask a question back)</small>
     <input id="contact" type="text" maxlength="64" autocomplete="off">
   </label>
 
-  <button id="send" type="submit">Send request</button>
+  <button id="send" type="submit">Send</button>
   <p id="done" hidden></p>
   <p id="error" hidden></p>
 </form>
 
-<p><small>Plugins not out yet can't take requests here: vote for them on <a href="coming.html">Coming next</a> instead.</small></p>
+<p><small>Plugins not out yet can't take reports or requests here: vote for them on <a href="coming.html">Coming next</a> instead.</small></p>
 
 <script>
   const API = "https://votes.bleel.workers.dev";
@@ -70,13 +105,34 @@
   const done = document.getElementById("done");
   const error = document.getElementById("error");
   const count = document.getElementById("count");
+  const textLabel = document.getElementById("text-label");
+  const bugFields = document.getElementById("bug-fields");
+  const android = document.getElementById("android");
+  const version = document.getElementById("version");
+  const app = document.getElementById("app");
+  const logs = document.getElementById("logs");
   let counts = {};
+
+  const kind = () => form.querySelector('input[name="kind"]:checked')?.value;
+
+  // A bug asks for the steps, the Android version and logs; a request for the idea
+  function showKind() {
+    const bug = kind() === "bug";
+    bugFields.hidden = !bug;
+    android.required = bug;
+    textLabel.textContent = bug ? "What went wrong?" : "What should it do?";
+    text.placeholder = bug
+      ? "What you did, step by step, what happened, and what you expected instead."
+      : "What you want, and when you'd use it. A sentence or two is plenty.";
+    showCount();
+  }
+  for (const radio of form.querySelectorAll('input[name="kind"]')) radio.onchange = showKind;
 
   const name = () => plugin.options[plugin.selectedIndex]?.text ?? "it";
 
   function showCount() {
     const n = counts[plugin.value];
-    count.textContent = plugin.value && n ? `${n} request${n === 1 ? "" : "s"} for ${name()} so far` : "";
+    count.textContent = kind() === "request" && plugin.value && n ? `${n} request${n === 1 ? "" : "s"} for ${name()} so far` : "";
   }
   plugin.onchange = showCount;
 
@@ -94,7 +150,13 @@
       const r = await fetch(`${API}/request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plugin: plugin.value, text: text.value, contact: contact.value }),
+        body: JSON.stringify({
+          kind: kind(),
+          plugin: plugin.value,
+          text: text.value,
+          contact: contact.value,
+          ...(kind() === "bug" ? { android: android.value, app: app.value, version: version.value, logs: logs.value } : {}),
+        }),
       });
       const body = await r.json();
       if (!r.ok) {
@@ -104,8 +166,13 @@
         error.hidden = false;
         return;
       }
-      counts[plugin.value] = body.count;
-      done.textContent = `Sent. Thanks! That's request ${body.count} for ${name()}.`;
+      if (kind() === "bug") {
+        done.textContent = `Sent. Thanks! I'll look into it${contact.value ? " and message you if I need more" : ""}.`;
+        logs.value = "";
+      } else {
+        counts[plugin.value] = body.count;
+        done.textContent = `Sent. Thanks! That's request ${body.count} for ${name()}.`;
+      }
       done.hidden = false;
       text.value = "";
       showCount();

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Report a Bug or Request a Feature · Bazinga</title>
-<meta name="description" content="Report a bug or ask for something new in one of the Bazinga plugins.">
+<title>Bugs, Requests and Ideas · Bazinga</title>
+<meta name="description" content="Report a bug, ask for something new in a Bazinga plugin, or suggest a new plugin.">
 <style>
   label { display: block; margin-top: 1em; }
   select, textarea, input { display: block; width: 100%; max-width: 32em; margin-top: .3em; font: inherit; }
@@ -22,19 +22,20 @@
 </head>
 <body>
 
-<nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <a href="coming.html">Coming next</a> · <b>Bugs &amp; requests</b></nav>
+<nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <a href="coming.html">Coming next</a> · <b>Bugs &amp; ideas</b></nav>
 
-<h1>Report a bug or request a feature</h1>
-<p>Something broken in one of the plugins, or something it should do. Pick the plugin, tell me about it, and it lands with me. No sign-in; up to five a day.</p>
+<h1>Bugs, requests and ideas</h1>
+<p>Something broken, something a plugin should do, or an idea for a new plugin. It comes straight to me. No sign-in; up to five a day.</p>
 
 <form id="form">
   <fieldset>
     <legend>What is it?</legend>
     <input type="radio" name="kind" id="kind-bug" value="bug" required><label for="kind-bug">Something's broken</label>
-    <input type="radio" name="kind" id="kind-request" value="request"><label for="kind-request">Something new</label>
+    <input type="radio" name="kind" id="kind-request" value="request"><label for="kind-request">Something new for a plugin</label>
+    <input type="radio" name="kind" id="kind-idea" value="idea"><label for="kind-idea">An idea for a new plugin</label>
   </fieldset>
 
-  <label>Plugin
+  <label id="plugin-field">Plugin
     <select id="plugin" required>
       <option value="" disabled selected>Pick one</option>
       <optgroup label="Batch one">
@@ -54,7 +55,6 @@
         <option value="char-counter">Character Counter</option>
       </optgroup>
       <optgroup label="In community review">
-        <option value="show-tag">Show Tag</option>
         <option value="pronouns">Pronouns</option>
         <option value="hide-call-buttons">Hide Call Buttons</option>
         <option value="staff-tags">Staff Tags</option>
@@ -71,14 +71,6 @@
   <div id="bug-fields" hidden>
     <label>Android version
       <input id="android" type="text" maxlength="32" placeholder="e.g. Android 15" autocomplete="off">
-    </label>
-    <label>Discord and Valenced versions <small>(optional)</small>
-      <input id="app" type="text" maxlength="64" placeholder="e.g. Discord 352.6, Valenced 1.2.4" autocomplete="off">
-      <small class="hint">Both are shown in Discord under Settings → Valenced.</small>
-    </label>
-    <label>Plugin version <small>(optional)</small>
-      <input id="version" type="text" maxlength="32" placeholder="e.g. 1.3.9" autocomplete="off">
-      <small class="hint">Tap the plugin in Valenced's plugin list: it shows the version.</small>
     </label>
     <label>Logs <small>(optional, but they help a lot)</small>
       <input id="logfile" type="file" accept=".txt,.log,text/plain">
@@ -97,7 +89,7 @@
   <p id="error" hidden></p>
 </form>
 
-<p><small>Plugins not out yet can't take reports or requests here: vote for them on <a href="coming.html">Coming next</a> instead.</small></p>
+<p><small>Plugins that aren't out yet can't take reports or requests here: vote for them on <a href="coming.html">Coming next</a> instead.</small></p>
 
 <script>
   const API = "https://votes.bleel.workers.dev";
@@ -112,8 +104,7 @@
   const textLabel = document.getElementById("text-label");
   const bugFields = document.getElementById("bug-fields");
   const android = document.getElementById("android");
-  const version = document.getElementById("version");
-  const app = document.getElementById("app");
+  const pluginField = document.getElementById("plugin-field");
   const logs = document.getElementById("logs");
   const logfile = document.getElementById("logfile");
   const logfileNote = document.getElementById("logfile-note");
@@ -144,15 +135,20 @@
 
   const kind = () => form.querySelector('input[name="kind"]:checked')?.value;
 
-  // A bug asks for the steps, the Android version and logs; a request for the idea
+  // A bug asks for the steps, the Android version and logs; a request for what the plugin should
+  // do; an idea is for a plugin that doesn't exist yet, so it has no plugin to pick.
+  const PROMPTS = {
+    bug: ["What went wrong?", "What you did, step by step, what happened, and what you expected instead."],
+    request: ["What should it do?", "What you want, and when you'd use it. A sentence or two is plenty."],
+    idea: ["What would the plugin do?", "What it does and when you'd use it. A name for it too, if you have one."],
+  };
   function showKind() {
-    const bug = kind() === "bug";
-    bugFields.hidden = !bug;
-    android.required = bug;
-    textLabel.textContent = bug ? "What went wrong?" : "What should it do?";
-    text.placeholder = bug
-      ? "What you did, step by step, what happened, and what you expected instead."
-      : "What you want, and when you'd use it. A sentence or two is plenty.";
+    const k = kind() ?? "request";
+    bugFields.hidden = k !== "bug";
+    android.required = k === "bug";
+    pluginField.hidden = k === "idea";
+    plugin.required = k !== "idea";
+    [textLabel.textContent, text.placeholder] = PROMPTS[k];
     showCount();
   }
   for (const radio of form.querySelectorAll('input[name="kind"]')) radio.onchange = showKind;
@@ -181,10 +177,10 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           kind: kind(),
-          plugin: plugin.value,
+          ...(kind() === "idea" ? {} : { plugin: plugin.value }),
           text: text.value,
           contact: contact.value,
-          ...(kind() === "bug" ? { android: android.value, app: app.value, version: version.value, logs: logs.value } : {}),
+          ...(kind() === "bug" ? { android: android.value, logs: logs.value } : {}),
         }),
       });
       const body = await r.json();
@@ -200,6 +196,8 @@
         logs.value = "";
         logfile.value = "";
         logfileNote.hidden = true;
+      } else if (kind() === "idea") {
+        done.textContent = `Sent. Thanks for the idea!${contact.value ? " I'll message you if I pick it up." : ""}`;
       } else {
         counts[plugin.value] = body.count;
         done.textContent = `Sent. Thanks! That's request ${body.count} for ${name()}.`;

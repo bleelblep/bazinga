@@ -4,167 +4,228 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Current Plugins · Bazinga</title>
-<meta name="description" content="The plugins in Bazinga Plugins, batch by batch.">
+<meta name="description" content="Every plugin in Bazinga Plugins and everything it does.">
 <style>
   td, th { text-align: left; vertical-align: top; }
+  h3 { margin-bottom: .2em; }
+  h3 + p { margin-top: 0; }
+  .credit { color: #666; }
 </style>
 </head>
 <body>
 
-<nav><a href="./">Home</a> · <b>Current plugins</b> · <a href="coming.html">Coming next</a> · <a href="requests.html">Bugs &amp; requests</a></nav>
+<nav><a href="./">Home</a> · <b>Current plugins</b> · <a href="coming.html">Coming next</a> · <a href="requests.html">Bugs &amp; ideas</a></nav>
 
 <h1>Current plugins</h1>
+<p>Everything each plugin does. Most are JavaScript only, so they work on Android and iOS; the ones marked <small>Android only</small> have native Android code. Most have a changelog: the clock icon at the top right of their settings.</p>
+
+<p><small>
+<a href="#character-counter">Character Counter</a> ·
+<a href="#custom-timestamps">Custom Timestamps</a> ·
+<a href="#hide-call-buttons">Hide Call Buttons</a> ·
+<a href="#hide-servers">Hide Servers</a> ·
+<a href="#live-markdown">Live Markdown</a> ·
+<a href="#new-members">New Members</a> ·
+<a href="#no-dividers">No Dividers</a> ·
+<a href="#pocket-browser">Pocket Browser</a> ·
+<a href="#pronouns">Pronouns</a> ·
+<a href="#review-db">ReviewDB</a> ·
+<a href="#round-corners">Round Corners</a> ·
+<a href="#send-tweaks">Send Tweaks</a> ·
+<a href="#sharp-corners">Sharp Corners</a> ·
+<a href="#staff-tags">Staff Tags</a> ·
+<a href="#text-animation">Text Animation</a> ·
+<a href="#timezones">Timezones</a>
+</small></p>
 
 <h2 id="review">In community review</h2>
-<p>I've had these five pull requests open on the <a href="https://github.com/Valenced/valenced-community-plugins">community repo</a> since October 27. Since I'm not sure when they'll be reviewed, I've decided to go ahead and share them here in the meantime. If any of them get merged later on, the community version will take over, and I'll update this page to let you know.</p>
+<p>I've had these pull requests open on the <a href="https://github.com/Valenced/valenced-community-plugins">community repo</a> since October 27. While they wait to be reviewed, they're shared here. If one gets merged, the community version takes over and it leaves this page.</p>
+<p><small>Merged so far: <b>Show Tag</b>, now in the community repo.</small></p>
 
-<h3>Show Tag</h3>
-<p>Usernames next to display names in chat.</p>
-<ul>
-  <li>The username after the display name in message headers and reply previews</li>
-  <li>Or replace the display name with the username</li>
-</ul>
-
-<h3>Pronouns</h3>
+<h3 id="pronouns">Pronouns</h3>
 <p>People's pronouns as a small tag next to their name in chat.</p>
 <ul>
-  <li>From Discord profiles, server profiles and PronounDB (PronounDB can be turned off)</li>
-  <li>Only real pronouns by default, so bios and jokes in the field don't become a badge</li>
-  <li>One colour for everyone, their role colour, or a colour per person</li>
-  <li>Set or override anyone's pronouns yourself</li>
+  <li>Read from their Discord profile (the server profile first), and optionally from <a href="https://pronoundb.org">PronounDB</a></li>
+  <li>"Only real pronouns" keeps just the pronoun sets from a profile field ("he/him 🌈 | 19" shows "he/him") and hides fields with none</li>
+  <li>Neopronouns included; any/all can be counted or not, and you can add words of your own</li>
+  <li>Choose who gets a badge: everyone, everyone except people you hide, or only people you pick</li>
+  <li>Set someone's pronouns yourself from the long-press menu on their message, or by user ID</li>
+  <li>One badge colour for everyone, each person's role colour, or a colour per person</li>
 </ul>
 
-<h3>Hide Call Buttons</h3>
-<p>Hides the call and video buttons you keep tapping by mistake.</p>
+<h3 id="hide-call-buttons">Hide Call Buttons</h3>
+<p>Hides the call and video buttons you never use. Calls still work from everywhere else.</p>
 <ul>
-  <li>The phone and camera icons at the top of DMs and group DMs</li>
-  <li>The call button on profiles and in the friends list</li>
-  <li>The camera button in voice channel controls</li>
-  <li>Each one has its own switch</li>
+  <li>The call button on someone's profile</li>
+  <li>The call and video buttons at the top of a DM or group DM</li>
+  <li>The call button at the end of each row in the friends list</li>
+  <li>The camera button in the voice channel controls</li>
+  <li>Each button has its own switch</li>
 </ul>
+<p class="credit"><small>A port of John's (janisslsm) Hide call buttons for Vendetta.</small></p>
 
-<h3>Staff Tags</h3>
-<p>OWNER, ADMIN, STAFF, MOD, VC Mod, Chat Mod and WEBHOOK tags, like old desktop plugins.</p>
+<h3 id="staff-tags">Staff Tags</h3>
+<p>OWNER, ADMIN, STAFF, MOD, VC Mod, Chat Mod and WEBHOOK tags next to staff, worked out from their permissions in that server.</p>
 <ul>
-  <li>In chat, on profiles and in member lists</li>
-  <li>Change each tag's text, colour, gradient or icon, or show just the icon</li>
-  <li>Optionally colour tags with the person's top role</li>
+  <li>In chat, in the member list and on profiles</li>
+  <li>Hide or rename any tag</li>
+  <li>Give a tag a colour or a two-colour gradient</li>
+  <li>Add an icon (Discord's own or your own SVG), or show the icon alone</li>
+  <li>Optionally use the person's top role colour as the tag background</li>
+  <li>Reset any tag to how it started</li>
 </ul>
+<p class="credit"><small>A port of Staff Tags for Revenge by Fiery and シグマ siguma.</small></p>
 
-<h3>Live Markdown <small>Android only</small></h3>
-<p>Formatting shows up in the message box as you type.</p>
+<h3 id="live-markdown">Live Markdown <small>Android only</small></h3>
+<p>Formatting shows up in the message box as you type, instead of the raw <code>**symbols**</code>.</p>
 <ul>
-  <li>Bold, italics, underline, strikethrough, code, spoilers, headings, subtext and ANSI colours styled as you type</li>
-  <li>Optionally fades the symbols and grows headings like in chat</li>
-  <li>Select text to get formatting buttons next to Copy and Paste</li>
+  <li>Bold, italics, underline, strikethrough, code, spoilers and more, styled as you type</li>
+  <li>Headings grow and <code>-#</code> subtext shrinks like in chat (can be turned off)</li>
+  <li>Fades the markdown symbols so the text reads clean</li>
+  <li>Code in a monospace font</li>
+  <li>Select text to get Bold, Italic and the rest next to Copy and Paste; tap one again to undo it</li>
 </ul>
 
 <h2>Batch one</h2>
-<p>The seven plugins that opened the repo. All JavaScript only, so they work on Android and iOS.</p>
-<p><small>Most plugins have a changelog: the clock icon at the top right of their settings.</small></p>
+<p>The seven plugins that opened the repo, on October 28. All work on Android and iOS.</p>
 
-<h3>Custom Timestamps</h3>
-<p>Choose how message times look.</p>
+<h3 id="custom-timestamps">Custom Timestamps</h3>
+<p>Choose how the time next to each message looks.</p>
 <ul>
-  <li>Calendar ("Today at 14:05"), relative ("5 minutes ago"), ISO 8601 or your own format</li>
-  <li>Optionally shows name, avatar and time on every message instead of grouping</li>
+  <li>Calendar ("Today at 2:05 PM", or a date for older messages), relative ("5 minutes ago"), ISO 8601 (in UTC), or your own format</li>
+  <li>Custom formats use moment.js-style letters (<code>dddd, MMMM Do YYYY, h:mm:ss a</code>); put words in <code>[brackets]</code> to keep them as written</li>
+  <li>A second custom format for messages sent today, such as <code>h:mm A</code> for just the time</li>
+  <li><code>{day}</code> says "Today" or "Yesterday" (the weekday on other days)</li>
+  <li>Settings list every format letter with an example, plus ready-made formats you can tap to use</li>
+  <li>A 24-hour switch for Calendar ("Today at 14:05")</li>
+  <li>Optionally shows the name, avatar and time on every message instead of grouping them</li>
+</ul>
+<p class="credit"><small>Based on Custom Timestamps by Fiery.</small></p>
+
+<h3 id="hide-servers">Hide Servers</h3>
+<p>Hide servers, folders and channels you don't want to see. Only your device changes: you stay in the server, and your server order elsewhere isn't touched.</p>
+<ul>
+  <li>Tap the eye at the bottom of the server bar, then tap servers to hide or show them; hidden ones are darkened until you tap the tick</li>
+  <li>The small eye on a folder's corner hides the whole folder</li>
+  <li>Hide a channel or category from its long-press menu</li>
+  <li>Bring anything back from a list in settings</li>
+  <li>Hidden servers' emoji still show in the emoji picker, unless you turn on "Hide their emoji too"</li>
+</ul>
+<p class="credit"><small>With blerp; one file adapted from kmmiio99o's ServerDrawer.</small></p>
+
+<h3 id="new-members">New Members</h3>
+<p>A sprout next to people who joined the server in the last week, like on desktop.</p>
+<ul>
+  <li>The badge as an emoji, a recoloured icon, or Discord's own</li>
+  <li>Any icon colour, or reset it to green</li>
+  <li>If someone's role has an icon, show the badge in its place, or keep the role icon and add 🌱 after the name</li>
 </ul>
 
-<h3>Hide Servers</h3>
-<p>Hide what you don't want to see, on your device only.</p>
+<h3 id="no-dividers">No Dividers</h3>
+<p>Removes the thin lines between rows in settings and other lists.</p>
 <ul>
-  <li>Hide servers, folders and channels from their long-press menus</li>
-  <li>Bring anything back from settings</li>
-  <li>You stay in the server, and other devices aren't affected</li>
+  <li>Nothing to set up; turn it off to bring the lines back</li>
 </ul>
 
-<h3>New Members</h3>
-<p>A sprout next to people who joined in the last week, like desktop.</p>
-<ul>
-  <li>Badge as an emoji, a recoloured icon or Discord's own</li>
-  <li>Any colour, or reset to green</li>
-</ul>
-
-<h3>No Dividers</h3>
-<p>Removes the thin lines between rows in settings and lists.</p>
-<ul>
-  <li>Nothing to set up; turn it off to bring them back</li>
-</ul>
-
-<h3>ReviewDB</h3>
-<p>Read and write reviews on profiles and servers.</p>
+<h3 id="review-db">ReviewDB</h3>
+<p>Read and write reviews on people's profiles and on servers, from <a href="https://reviewdb.mantikafasi.dev">ReviewDB</a>.</p>
 <ul>
   <li>Reviews on user profiles and in server menus</li>
   <li>Write, vote on, delete and report reviews</li>
-  <li>Block reviewers; hide warnings or timestamps</li>
-  <li>Notifications for new reviews of you</li>
-  <li>Sign in with Discord's own Authorize screen (ReviewDB only sees your username and avatar)</li>
+  <li>Block people whose reviews you don't want to see</li>
+  <li>Hide warnings or timestamps</li>
+  <li>Notifications about new reviews of you</li>
+  <li>Sign in with Discord's own Authorize screen: ReviewDB only sees your username and avatar, not your messages or servers</li>
 </ul>
+<p class="credit"><small>A port of Vencord's ReviewDB by mantikafasi and Vendicated (GPL-3.0).</small></p>
 
-<h3>Send Tweaks</h3>
-<p>Tidies messages as you send them.</p>
+<h3 id="send-tweaks">Send Tweaks</h3>
+<p>Tidies your messages as you send them. Nothing in code blocks is touched.</p>
 <ul>
-  <li>Strips tracking from links (YouTube, Spotify, X, Instagram, Amazon…) plus ClearURLs rules</li>
-  <li>Capitalise sentences, add apostrophes, end with a full stop</li>
-  <li>Your own find-and-replace rules for text or links (e.g. X → fxtwitter), optionally live as you type</li>
-  <li>Dates, times and snippets inside replacements</li>
-  <li>Silent messages, always or just once</li>
-  <li>Hold send and swipe up to send one message silent, loud or exactly as typed</li>
-  <li>Optionally works on edits; import and export your rules</li>
+  <li><b>Clean links:</b> strips tracking from links (YouTube, Spotify, X, Instagram, Amazon and more), plus the ClearURLs rules, updated about once a week</li>
+  <li><b>Polish</b> (off by default): capitalise sentences, add apostrophes, optionally end with a full stop</li>
+  <li><b>Your own rules:</b> find-and-replace for text or links, for example X links to fixupx</li>
+  <li><b>Ready-made rules:</b> one per site, each showing what it changes; new and fixed ones arrive without a plugin update</li>
+  <li>Rules can apply as you type; anything typing missed is caught when you send</li>
+  <li>Import and export your rules</li>
+  <li><code>{timestamp}</code> becomes the current time, shown in each reader's own time zone</li>
+  <li><code>{rainbow:text}</code> becomes rainbow-coloured text</li>
+  <li>Colour codes in <code>```ansi</code> blocks are fixed up so the colours show</li>
+  <li><b>Silent messages</b> (off by default): send every message without notifying anyone</li>
+  <li><b>Reply pings</b> (opt-in): start replies with the @ mention off; you can still turn it back on</li>
+  <li><b>Hold and swipe send:</b> let go halfway to preview the finished message, or swipe all the way up to send it exactly as typed; a plain tap can open the preview too</li>
+  <li><b>Edits:</b> cleaning and rules apply to edited messages too, and you see the result as soon as you open one (can be turned off)</li>
 </ul>
+<p class="credit"><small>With Rosie and WarFade.</small></p>
 
-<h3>Timezones</h3>
+<h3 id="timezones">Timezones</h3>
 <p>See someone's local time next to their messages.</p>
 <ul>
-  <li>Set anyone's timezone by searching a place or picking from a list</li>
-  <li>Shows their time, and optionally their day, in 12- or 24-hour</li>
-  <li>Reads the shared timezone list other clients use (can be turned off)</li>
+  <li>Set anyone's timezone by searching a place or from a list of zones</li>
+  <li>Their time, and optionally their day, beside their message times, in 12- or 24-hour</li>
+  <li>Reads the shared timezone list other clients use, so people who've added themselves show up on their own (can be turned off)</li>
+  <li>Can also read Equicord's timezone list (off by default, read only)</li>
+  <li>Set or change someone's zone from the ⋯ menu on their profile, or from the bottom of the message long-press menu (that one can be turned off)</li>
 </ul>
+<p class="credit"><small>A port of Aliucord's Timezones by aniimalz.</small></p>
 
 <h2>Batch two</h2>
-<p>Three of the five have native Android code, so they're Android only.</p>
+<p>Out October 31.</p>
 
-<h3>Round Corners</h3>
-<p>Undoes the redesign's squares: round servers, round buttons, a pill You bar.</p>
+<h3 id="round-corners">Round Corners</h3>
+<p>Undoes the redesign's squares.</p>
 <ul>
-  <li>Round server icons, and round Home, Create and Discover buttons next to them</li>
-  <li>The You bar as a pill with round buttons; the message box and chat bar buttons round too</li>
-  <li>Each part can be turned on or off on its own</li>
+  <li>Servers, Home, Create and Discover round again; the selected server can stay round or use the classic selection shape</li>
+  <li>Send, emoji, media, gift and apps buttons as circles, and the message box as a pill</li>
+  <li>The bottom bar and the You tab's floating bar as pills</li>
+  <li>Folders, channel rows, search bars and segmented controls fully round</li>
+  <li>Cards, settings rows and voice tiles with their pre-redesign corners, on a switch of their own</li>
+  <li>Each group of shapes has its own switch</li>
 </ul>
 
-<h3>Sharp Corners <small>Android only</small></h3>
+<h3 id="sharp-corners">Sharp Corners <small>Android only</small></h3>
 <p>The opposite: every corner in Discord sharp.</p>
 <ul>
   <li>Buttons, the message box, the You bar, menus, cards, sheets, server icons and pictures</li>
-  <li>The chat too: embeds, attachments, reactions, voice messages, mentions</li>
-  <li>Optionally circles as well, so avatars, status dots and round buttons become squares</li>
+  <li>The chat too, since messages are drawn natively</li>
+  <li>"Circles too" also squares avatars, status dots and round buttons</li>
+  <li>Can't run together with Round Corners, and tells you if both are on</li>
 </ul>
 
-<h3>Text Animation <small>Android only</small></h3>
+<h3 id="text-animation">Text Animation <small>Android only</small></h3>
 <p>Letters animate as you type and delete, with a smooth gliding cursor.</p>
 <ul>
-  <li>New letters fade in or grow in with a bounce; pastes ripple in one after another</li>
-  <li>Deleted letters fall away or turn to dust</li>
-  <li>The cursor slides to where you type or tap and fades instead of blinking, with an optional stretchy trail</li>
-  <li>Optionally every text field, not just the message box; password fields never animate</li>
+  <li>Typing: letters fade in, slide up, unblur, pop or tilt</li>
+  <li>Choose the speed, slide distance, and pop and tilt strength</li>
+  <li>Deleting: letters fall away, turn to dust, or just vanish</li>
+  <li>The cursor glides between positions, optionally with a stretchy trail</li>
+  <li>The message box only, or every text field (never password fields)</li>
+  <li>Try it out in settings</li>
   <li>Needs Android 10 or newer</li>
 </ul>
 
-<h3>Character Counter</h3>
-<p>Counts your message's characters in a square above the message box, and splits long ones into several.</p>
+<h3 id="character-counter">Character Counter</h3>
+<p>Counts your message's characters in a small square above the message box, and sends long ones as several messages.</p>
 <ul>
-  <li>Characters typed, characters left, or typed out of the limit; shown always or only near the limit</li>
+  <li>Characters typed, characters left, or typed out of the limit</li>
+  <li>Always shown, or only near the limit; with or without the word "characters"</li>
+  <li>On the right, it moves aside for Discord's Jump to present button</li>
   <li>Past the limit it turns red and says how far over you are</li>
-  <li>Split long messages: sends a long message as several parts, in order, with a limit on how many and a wait between them</li>
+  <li>Past the limit, Send splits the message at a blank line, a line break or the end of a sentence, and sends the parts in order, each after Discord confirms the one before</li>
+  <li>A sheet shows the progress with a Stop button; a setting can show the parts first instead</li>
+  <li>Tap the square to see how it would split</li>
 </ul>
-<p><small>My community pull request for this one was closed: another Character Counter was merged first. This is my version, split and all.</small></p>
+<p class="credit"><small>My community pull request for this one was closed: another Character Counter was merged first. This is my version, split and all.</small></p>
 
-<h3>Pocket Browser <small>Android only</small></h3>
-<p>A web browser with tabs and history in a new tab of the emoji picker.</p>
+<h3 id="pocket-browser">Pocket Browser <small>Android only</small></h3>
+<p>A web browser inside Discord, in a new tab of the emoji picker.</p>
 <ul>
-  <li>Tabs, private tabs, bookmarks, history, downloads and find in page</li>
-  <li>Links from chats open on the Web tab; share a page, picture or screenshot back to the chat</li>
-  <li>Pop-out video player; videos keep playing with the picker half open</li>
+  <li>Tabs, history, bookmarks and a speed dial; tabs can survive closing Discord</li>
+  <li>Search with DuckDuckGo (default), Google, Bing, Brave or Startpage</li>
+  <li>Open links from chat in it instead of leaving Discord</li>
+  <li>Pop videos out into a floating or picture-in-picture player that keeps playing when closed</li>
+  <li>Dark pages, desktop sites, text size, JavaScript and third-party cookies, each with a switch</li>
+  <li>Clear history or site data any time</li>
   <li>Needs Valenced 1.2.4 or newer</li>
 </ul>
 
@@ -172,18 +233,15 @@
 <p>A few plugins talk to services other than Discord. None of them sends your Discord login.</p>
 <table border="1" cellpadding="4">
   <tr><th>Plugin</th><th>Service</th><th>What it sends</th></tr>
-  <tr><td>Pronouns</td><td>PronounDB</td><td>User IDs of people in chat whose pronouns Discord doesn't have (can be turned off)</td></tr>
-  <tr><td>Pocket Browser</td><td>Any website you open in it</td><td>What a normal browser sends: the sites you visit see your requests, not anything from Discord</td></tr>
+  <tr><td>Pronouns</td><td>PronounDB</td><td>User IDs of people in chat, to look up their pronouns (can be turned off)</td></tr>
+  <tr><td>Pocket Browser</td><td>The sites you open, and your search engine</td><td>What any browser sends: the page you ask for and what you type into it. Nothing from Discord</td></tr>
   <tr><td>ReviewDB</td><td>ReviewDB</td><td>The profile or server you're viewing, your reviews and votes, and ReviewDB's own sign-in token</td></tr>
   <tr><td>Send Tweaks</td><td>ClearURLs rules</td><td>Nothing: downloads the rule list at most once a week (can be turned off)</td></tr>
+  <tr><td>Send Tweaks</td><td>Ready-made rules (the Bazinga plugin repo)</td><td>Nothing: downloads the list when you open Ready-made rules, and about weekly if you added one</td></tr>
   <tr><td>Timezones</td><td>Shared timezone list</td><td>User IDs of people in chat whose timezone you haven't set (can be turned off)</td></tr>
   <tr><td>Timezones</td><td>Open-Meteo place search</td><td>The place name you type (can be turned off)</td></tr>
+  <tr><td>Timezones</td><td>Equicord's timezone list</td><td>Nothing about you: downloads the whole list about once an hour (off by default)</td></tr>
 </table>
-
-<h2>Credits</h2>
-<p>Cynosphere (Show Tag) · Fiery (Custom Timestamps, Staff Tags) · John (Hide Call Buttons) · blerp, kmmiio99o (Hide Servers) · mantikafasi, Vendicated (ReviewDB, GPL-3.0) · Rosie, WarFade (Send Tweaks) · aniimalz (Timezones)</p>
-
-<p><small>Tested on Discord 352.6 · Valenced 1.1.1.</small></p>
 
 </body>
 </html>

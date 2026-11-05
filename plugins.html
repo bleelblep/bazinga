@@ -27,63 +27,123 @@
 <a href="#live-markdown">Live Markdown</a> ·
 <a href="#new-members">New Members</a> ·
 <a href="#no-dividers">No Dividers</a> ·
+<a href="#picture-links">Picture Links</a> ·
+<a href="#plugin-hub">Plugin Hub</a> ·
 <a href="#pocket-browser">Pocket Browser</a> ·
 <a href="#pronouns">Pronouns</a> ·
 <a href="#review-db">ReviewDB</a> ·
 <a href="#round-corners">Round Corners</a> ·
 <a href="#send-tweaks">Send Tweaks</a> ·
 <a href="#sharp-corners">Sharp Corners</a> ·
+<a href="#speech-bubbles">Speech Bubbles</a> ·
 <a href="#staff-tags">Staff Tags</a> ·
 <a href="#text-animation">Text Animation</a> ·
-<a href="#timezones">Timezones</a>
+<a href="#timezones">Timezones</a> ·
+<a href="#ui-tweaks">UI Tweaks</a>
 </small></p>
 
-<h2 id="review">In community review</h2>
-<p>I've had these pull requests open on the <a href="https://github.com/Valenced/valenced-community-plugins">community repo</a> since October 27. While they wait to be reviewed, they're shared here. If one gets merged, the community version takes over and it leaves this page.</p>
-<p><small>Merged so far: <b>Show Tag</b>, now in the community repo.</small></p>
+<h2>Batch three</h2>
+<p>Out November 5.</p>
 
-<h3 id="pronouns">Pronouns</h3>
-<p>People's pronouns as a small tag next to their name in chat.</p>
+<h3 id="speech-bubbles">Speech Bubbles <small>Android only</small></h3>
+<p>Chat as speech bubbles: your messages on the right, everyone else's on the left.</p>
 <ul>
-  <li>Read from their Discord profile (the server profile first), and optionally from <a href="https://pronoundb.org">PronounDB</a></li>
-  <li>"Only real pronouns" keeps just the pronoun sets from a profile field ("he/him 🌈 | 19" shows "he/him") and hides fields with none</li>
-  <li>Neopronouns included; any/all can be counted or not, and you can add words of your own</li>
-  <li>Choose who gets a badge: everyone, everyone except people you hide, or only people you pick</li>
-  <li>Set someone's pronouns yourself from the long-press menu on their message, or by user ID</li>
-  <li>One badge colour for everyone, each person's role colour, or a colour per person</li>
+  <li>Bubble colours from your theme (or swapped), or your own; optionally a colour per person</li>
+  <li>Corner roundness from square to pill, tails on the bubbles, breaks between messages sent far apart, and optionally no profile pictures</li>
+  <li>Message times hidden, shown under the bubble when you tap it, or in a pop-up above it</li>
+  <li>Swipe left with two fingers to see the time of every message</li>
+  <li>Reactions as round pills in the bubble's colour</li>
+  <li>Spoilers covered in shimmering ink until you tap them</li>
+  <li>A send animation: your message flies up into the chat (off by default)</li>
+  <li>A typing bubble while someone is typing</li>
+  <li>On in DMs, and optionally in servers</li>
 </ul>
 
-<h3 id="hide-call-buttons">Hide Call Buttons</h3>
-<p>Hides the call and video buttons you never use. Calls still work from everywhere else.</p>
+<h3 id="plugin-hub">Plugin Hub</h3>
+<p>A Plugin Hub section in Discord's settings, with shortcuts straight into the settings of the plugins you choose.</p>
 <ul>
-  <li>The call button on someone's profile</li>
-  <li>The call and video buttons at the top of a DM or group DM</li>
-  <li>The call button at the end of each row in the friends list</li>
-  <li>The camera button in the voice channel controls</li>
-  <li>Each button has its own switch</li>
+  <li>Pick which plugins go in the hub; star up to four favourites to show as big tiles at the top</li>
+  <li>Plugins you've uninstalled are spotted, and you can clear them out in one tap</li>
+  <li>Choosing plugins needs Valenced's Developer Mode switched on; using the hub doesn't</li>
 </ul>
-<p class="credit"><small>A port of John's (janisslsm) Hide call buttons for Vendetta.</small></p>
 
-<h3 id="staff-tags">Staff Tags</h3>
-<p>OWNER, ADMIN, STAFF, MOD, VC Mod, Chat Mod and WEBHOOK tags next to staff, worked out from their permissions in that server.</p>
+<h3 id="ui-tweaks">UI Tweaks <small>Android only</small></h3>
+<p>Hide the parts of Discord you don't use, and choose what double-tap and swipes do.</p>
 <ul>
-  <li>In chat, in the member list and on profiles</li>
-  <li>Hide or rename any tag</li>
-  <li>Give a tag a colour or a two-colour gradient</li>
-  <li>Add an icon (Discord's own or your own SVG), or show the icon alone</li>
-  <li>Optionally use the person's top role colour as the tag background</li>
-  <li>Reset any tag to how it started</li>
+  <li>Hide rows in the message long-press menu, items in the + menu and sections of Discord's settings, each picked from a list of what it has seen; an Edit menu row hides rows right in the menu</li>
+  <li>Hide the reaction bar, the GIFs or Stickers tab, Message Requests and Quests (display only: quests you started keep going)</li>
+  <li>Keep the picker open after sending a GIF</li>
+  <li>Double-tap and swipe on a message: reply, edit, react, copy, quote, mention, pin, forward, start a thread, open a profile, mark unread and more</li>
+  <li>Other people's messages can get a second swipe action too</li>
 </ul>
-<p class="credit"><small>A port of Staff Tags for Revenge by Fiery and シグマ siguma.</small></p>
 
-<h3 id="live-markdown">Live Markdown <small>Android only</small></h3>
-<p>Formatting shows up in the message box as you type, instead of the raw <code>**symbols**</code>.</p>
+<h3 id="picture-links">Picture Links</h3>
+<p>Tap profile pictures and banners to open them full size, with save and share. Nothing to set up.</p>
 <ul>
-  <li>Bold, italics, underline, strikethrough, code, spoilers and more, styled as you type</li>
-  <li>Headings grow and <code>-#</code> subtext shrinks like in chat (can be turned off)</li>
-  <li>Fades the markdown symbols so the text reads clean</li>
-  <li>Code in a monospace font</li>
-  <li>Select text to get Bold, Italic and the rest next to Copy and Paste; tap one again to undo it</li>
+  <li>Profile pictures open in Discord's own viewer at full size, with save and share</li>
+  <li>Tap a banner to view it; long-press for an animated banner</li>
+  <li>Long-press a server profile picture to see the person's main one</li>
+</ul>
+<p class="credit"><small>A port of redstonekasi's Picture Links, as updated by Rico040.</small></p>
+
+<h2>Batch two</h2>
+<p>Out October 31.</p>
+
+<h3 id="round-corners">Round Corners</h3>
+<p>Undoes the redesign's squares.</p>
+<ul>
+  <li>Servers, Home, Create and Discover round again; the selected server can stay round or use the classic selection shape</li>
+  <li>Send, emoji, media, gift and apps buttons as circles, and the message box as a pill</li>
+  <li>The bottom bar and the You tab's floating bar as pills</li>
+  <li>Folders, channel rows, search bars and segmented controls fully round</li>
+  <li>Cards, settings rows and voice tiles with their pre-redesign corners, on a switch of their own</li>
+  <li>Each group of shapes has its own switch</li>
+</ul>
+
+<h3 id="sharp-corners">Sharp Corners <small>Android only</small></h3>
+<p>The opposite: every corner in Discord sharp.</p>
+<ul>
+  <li>Buttons, the message box, the You bar, menus, cards, sheets, server icons and pictures</li>
+  <li>The chat too, since messages are drawn natively</li>
+  <li>"Circles too" also squares avatars, status dots and round buttons</li>
+  <li>Can't run together with Round Corners, and tells you if both are on</li>
+</ul>
+
+<h3 id="text-animation">Text Animation <small>Android only</small></h3>
+<p>Letters animate as you type and delete, with a smooth gliding cursor.</p>
+<ul>
+  <li>Typing: letters fade in, slide up, unblur, pop or tilt</li>
+  <li>Choose the speed, slide distance, and pop and tilt strength</li>
+  <li>Deleting: letters fall away, turn to dust, or just vanish</li>
+  <li>The cursor glides between positions, optionally with a stretchy trail</li>
+  <li>The message box only, or every text field (never password fields)</li>
+  <li>Try it out in settings</li>
+  <li>Needs Android 10 or newer</li>
+</ul>
+
+<h3 id="character-counter">Character Counter</h3>
+<p>Counts your message's characters in a small square above the message box, and sends long ones as several messages.</p>
+<ul>
+  <li>Characters typed, characters left, or typed out of the limit</li>
+  <li>Always shown, or only near the limit; with or without the word "characters"</li>
+  <li>On the right, it moves aside for Discord's Jump to present button</li>
+  <li>Past the limit it turns red and says how far over you are</li>
+  <li>Past the limit, Send splits the message at a blank line, a line break or the end of a sentence, and sends the parts in order, each after Discord confirms the one before</li>
+  <li>A sheet shows the progress with a Stop button; a setting can show the parts first instead</li>
+  <li>Tap the square to see how it would split</li>
+</ul>
+<p class="credit"><small>My community pull request for this one was closed: another Character Counter was merged first. This is my version, split and all.</small></p>
+
+<h3 id="pocket-browser">Pocket Browser <small>Android only</small></h3>
+<p>A web browser inside Discord, in a new tab of the emoji picker.</p>
+<ul>
+  <li>Tabs, history, bookmarks and a speed dial; tabs can survive closing Discord</li>
+  <li>Search with DuckDuckGo (default), Google, Bing, Brave or Startpage</li>
+  <li>Open links from chat in it instead of leaving Discord</li>
+  <li>Pop videos out into a floating or picture-in-picture player that keeps playing when closed</li>
+  <li>Dark pages, desktop sites, text size, JavaScript and third-party cookies, each with a switch</li>
+  <li>Clear history or site data any time</li>
+  <li>Needs Valenced 1.2.4 or newer</li>
 </ul>
 
 <h2>Batch one</h2>
@@ -169,64 +229,52 @@
 </ul>
 <p class="credit"><small>A port of Aliucord's Timezones by aniimalz.</small></p>
 
-<h2>Batch two</h2>
-<p>Out October 31.</p>
+<h2 id="review">In community review</h2>
+<p>I've had these pull requests open on the <a href="https://github.com/Valenced/valenced-community-plugins">community repo</a> since October 27. While they wait to be reviewed, they're shared here. If one gets merged, the community version takes over and it leaves this page.</p>
+<p><small>Merged so far: <b>Show Tag</b>, now in the community repo.</small></p>
 
-<h3 id="round-corners">Round Corners</h3>
-<p>Undoes the redesign's squares.</p>
+<h3 id="pronouns">Pronouns</h3>
+<p>People's pronouns as a small tag next to their name in chat.</p>
 <ul>
-  <li>Servers, Home, Create and Discover round again; the selected server can stay round or use the classic selection shape</li>
-  <li>Send, emoji, media, gift and apps buttons as circles, and the message box as a pill</li>
-  <li>The bottom bar and the You tab's floating bar as pills</li>
-  <li>Folders, channel rows, search bars and segmented controls fully round</li>
-  <li>Cards, settings rows and voice tiles with their pre-redesign corners, on a switch of their own</li>
-  <li>Each group of shapes has its own switch</li>
+  <li>Read from their Discord profile (the server profile first), and optionally from <a href="https://pronoundb.org">PronounDB</a></li>
+  <li>"Only real pronouns" keeps just the pronoun sets from a profile field ("he/him 🌈 | 19" shows "he/him") and hides fields with none</li>
+  <li>Neopronouns included; any/all can be counted or not, and you can add words of your own</li>
+  <li>Choose who gets a badge: everyone, everyone except people you hide, or only people you pick</li>
+  <li>Set someone's pronouns yourself from the long-press menu on their message, or by user ID</li>
+  <li>One badge colour for everyone, each person's role colour, or a colour per person</li>
 </ul>
 
-<h3 id="sharp-corners">Sharp Corners <small>Android only</small></h3>
-<p>The opposite: every corner in Discord sharp.</p>
+<h3 id="hide-call-buttons">Hide Call Buttons</h3>
+<p>Hides the call and video buttons you never use. Calls still work from everywhere else.</p>
 <ul>
-  <li>Buttons, the message box, the You bar, menus, cards, sheets, server icons and pictures</li>
-  <li>The chat too, since messages are drawn natively</li>
-  <li>"Circles too" also squares avatars, status dots and round buttons</li>
-  <li>Can't run together with Round Corners, and tells you if both are on</li>
+  <li>The call button on someone's profile</li>
+  <li>The call and video buttons at the top of a DM or group DM</li>
+  <li>The call button at the end of each row in the friends list</li>
+  <li>The camera button in the voice channel controls</li>
+  <li>Each button has its own switch</li>
 </ul>
+<p class="credit"><small>A port of John's (janisslsm) Hide call buttons for Vendetta.</small></p>
 
-<h3 id="text-animation">Text Animation <small>Android only</small></h3>
-<p>Letters animate as you type and delete, with a smooth gliding cursor.</p>
+<h3 id="staff-tags">Staff Tags</h3>
+<p>OWNER, ADMIN, STAFF, MOD, VC Mod, Chat Mod and WEBHOOK tags next to staff, worked out from their permissions in that server.</p>
 <ul>
-  <li>Typing: letters fade in, slide up, unblur, pop or tilt</li>
-  <li>Choose the speed, slide distance, and pop and tilt strength</li>
-  <li>Deleting: letters fall away, turn to dust, or just vanish</li>
-  <li>The cursor glides between positions, optionally with a stretchy trail</li>
-  <li>The message box only, or every text field (never password fields)</li>
-  <li>Try it out in settings</li>
-  <li>Needs Android 10 or newer</li>
+  <li>In chat, in the member list and on profiles</li>
+  <li>Hide or rename any tag</li>
+  <li>Give a tag a colour or a two-colour gradient</li>
+  <li>Add an icon (Discord's own or your own SVG), or show the icon alone</li>
+  <li>Optionally use the person's top role colour as the tag background</li>
+  <li>Reset any tag to how it started</li>
 </ul>
+<p class="credit"><small>A port of Staff Tags for Revenge by Fiery and シグマ siguma.</small></p>
 
-<h3 id="character-counter">Character Counter</h3>
-<p>Counts your message's characters in a small square above the message box, and sends long ones as several messages.</p>
+<h3 id="live-markdown">Live Markdown <small>Android only</small></h3>
+<p>Formatting shows up in the message box as you type, instead of the raw <code>**symbols**</code>.</p>
 <ul>
-  <li>Characters typed, characters left, or typed out of the limit</li>
-  <li>Always shown, or only near the limit; with or without the word "characters"</li>
-  <li>On the right, it moves aside for Discord's Jump to present button</li>
-  <li>Past the limit it turns red and says how far over you are</li>
-  <li>Past the limit, Send splits the message at a blank line, a line break or the end of a sentence, and sends the parts in order, each after Discord confirms the one before</li>
-  <li>A sheet shows the progress with a Stop button; a setting can show the parts first instead</li>
-  <li>Tap the square to see how it would split</li>
-</ul>
-<p class="credit"><small>My community pull request for this one was closed: another Character Counter was merged first. This is my version, split and all.</small></p>
-
-<h3 id="pocket-browser">Pocket Browser <small>Android only</small></h3>
-<p>A web browser inside Discord, in a new tab of the emoji picker.</p>
-<ul>
-  <li>Tabs, history, bookmarks and a speed dial; tabs can survive closing Discord</li>
-  <li>Search with DuckDuckGo (default), Google, Bing, Brave or Startpage</li>
-  <li>Open links from chat in it instead of leaving Discord</li>
-  <li>Pop videos out into a floating or picture-in-picture player that keeps playing when closed</li>
-  <li>Dark pages, desktop sites, text size, JavaScript and third-party cookies, each with a switch</li>
-  <li>Clear history or site data any time</li>
-  <li>Needs Valenced 1.2.4 or newer</li>
+  <li>Bold, italics, underline, strikethrough, code, spoilers and more, styled as you type</li>
+  <li>Headings grow and <code>-#</code> subtext shrinks like in chat (can be turned off)</li>
+  <li>Fades the markdown symbols so the text reads clean</li>
+  <li>Code in a monospace font</li>
+  <li>Select text to get Bold, Italic and the rest next to Copy and Paste; tap one again to undo it</li>
 </ul>
 
 <h2>Outside services</h2>

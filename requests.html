@@ -4,20 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bugs, Requests and Ideas · Bazinga</title>
-<meta name="description" content="Report a bug, ask for something new in a Bazinga plugin, or suggest a new plugin.">
+<meta name="description" content="Report a bug, ask for something in a Bazinga plugin (out now or coming soon), or suggest a new plugin.">
 <style>
   label { display: block; margin-top: 1em; }
-  select, textarea, input { display: block; width: 100%; max-width: 32em; margin-top: .3em; font: inherit; }
-  textarea { min-height: 8em; }
+  select, textarea, input[type=text] { display: block; width: 100%; max-width: 32em; margin-top: .3em; font: inherit; box-sizing: border-box; }
+  textarea { min-height: 7em; }
   button { margin-top: 1em; font: inherit; }
   #done, #error { margin-top: 1em; }
   #error { color: #b00020; }
-  fieldset { border: none; padding: 0; margin: 1em 0 0; }
-  fieldset label { display: inline; margin: 0 1.5em 0 .3em; }
-  fieldset input { display: inline; width: auto; }
-  .hint { display: block; color: #666; }
+  #broken-field { margin-top: 1em; }
+  #broken-field label { display: inline; margin: 0 0 0 .3em; }
+  details { margin-top: 1em; max-width: 32em; }
   #logs { font-family: monospace; font-size: .9em; }
-  #logfile { margin-top: .5em; }
+  .hint { display: block; color: #666; margin-top: .3em; }
 </style>
 </head>
 <body>
@@ -25,62 +24,73 @@
 <nav><a href="./">Home</a> · <a href="plugins.html">Current plugins</a> · <a href="coming.html">Coming next</a> · <b>Bugs &amp; ideas</b></nav>
 
 <h1>Bugs, requests and ideas</h1>
-<p>Something broken, something a plugin should do, or an idea for a new plugin. It comes straight to me. No sign-in; up to five a day.</p>
+<p>Something broken, something you'd like a plugin to do (even one that isn't out yet), or an idea for a new plugin. It comes straight to me. No sign-in.</p>
 
 <form id="form">
-  <fieldset>
-    <legend>What is it?</legend>
-    <input type="radio" name="kind" id="kind-bug" value="bug" required><label for="kind-bug">Something's broken</label>
-    <input type="radio" name="kind" id="kind-request" value="request"><label for="kind-request">Something new for a plugin</label>
-    <input type="radio" name="kind" id="kind-idea" value="idea"><label for="kind-idea">An idea for a new plugin</label>
-  </fieldset>
-
-  <label id="plugin-field">Plugin
+  <label>Which plugin?
     <select id="plugin" required>
       <option value="" disabled selected>Pick one</option>
-      <optgroup label="Batch one">
+      <optgroup label="Out now">
+        <option value="char-counter">Character Counter</option>
         <option value="custom-timestamps">Custom Timestamps</option>
+        <option value="hide-call-buttons">Hide Call Buttons</option>
         <option value="hide-servers-drawer">Hide Servers</option>
+        <option value="live-markdown">Live Markdown</option>
         <option value="new-members">New Members</option>
         <option value="no-dividers">No Dividers</option>
-        <option value="review-db">ReviewDB</option>
-        <option value="send-tweaks">Send Tweaks</option>
-        <option value="timezones">Timezones</option>
-      </optgroup>
-      <optgroup label="Batch two">
-        <option value="round-icons">Round Corners</option>
-        <option value="sharp-corners">Sharp Corners</option>
-        <option value="text-animation">Text Animation</option>
+        <option value="picture-links">Picture Links</option>
+        <option value="plugin-hub">Plugin Hub</option>
         <option value="pocket-browser">Pocket Browser</option>
-        <option value="char-counter">Character Counter</option>
-      </optgroup>
-      <optgroup label="In community review">
         <option value="pronouns">Pronouns</option>
-        <option value="hide-call-buttons">Hide Call Buttons</option>
+        <option value="review-db">ReviewDB</option>
+        <option value="round-icons">Round Corners</option>
+        <option value="send-tweaks">Send Tweaks</option>
+        <option value="sharp-corners">Sharp Corners</option>
+        <option value="speech-bubbles">Speech Bubbles</option>
         <option value="staff-tags">Staff Tags</option>
-        <option value="live-markdown">Live Markdown</option>
+        <option value="text-animation">Text Animation</option>
+        <option value="timezones">Timezones</option>
+        <option value="ui-tweaks">UI Tweaks</option>
+      </optgroup>
+      <optgroup label="Coming soon" data-upcoming>
+        <option value="ai-core">AI Core</option>
+        <option value="ansi-colours">ANSI Colours</option>
+        <option value="ghost-log-ng">Ghost Log Next Gen</option>
+        <option value="masked-links">Masked Links</option>
+        <option value="multi-scrobbler">Multi Scrobbler</option>
+        <option value="now-playing">Now Playing</option>
+        <option value="purple-galaxy">Purple Galaxy</option>
+        <option value="relationship-notifier">Relationship Notifier</option>
+        <option value="screenshot-redactor">Screenshot Redactor</option>
+        <option value="sekai-stickers">Sekai Stickers</option>
+        <option value="shimeji">Shimeji</option>
+        <option value="translate">Translate</option>
+        <option value="veil">Veil</option>
+        <option value="screen-effects">VFX</option>
+        <option value="wordart">WordArt</option>
+      </optgroup>
+      <optgroup label="Something else">
+        <option value="new">A new plugin idea</option>
       </optgroup>
     </select>
   </label>
   <small id="count"></small>
 
-  <label><span id="text-label">What should it do?</span>
-    <textarea id="text" required minlength="10" maxlength="1000" placeholder="What you want, and when you'd use it. A sentence or two is plenty."></textarea>
-  </label>
-
-  <div id="bug-fields" hidden>
-    <label>Android version
-      <input id="android" type="text" maxlength="32" placeholder="e.g. Android 15" autocomplete="off">
-    </label>
-    <label>Logs <small>(optional, but they help a lot)</small>
-      <input id="logfile" type="file" accept=".txt,.log,text/plain">
-      <small id="logfile-note" class="hint" hidden></small>
-      <textarea id="logs" maxlength="20000" placeholder="Paste the copied errors here, or choose a log file above."></textarea>
-      <small class="hint">Easiest: tap the plugin in Valenced's plugin list, then tap <b>Errors</b> to copy them, and paste here. No Errors row means it hasn't logged any; then copy the lines from around when it went wrong in Settings → Valenced → Developer → Debug Logs. Check for anything private, like names or messages, before you send.</small>
-    </label>
+  <div id="broken-field" hidden>
+    <input type="checkbox" id="broken"><label for="broken">Something's broken</label>
   </div>
 
-  <label>Discord username <small>(optional, so I can ask a question back)</small>
+  <label><span id="text-label">What would you like?</span>
+    <textarea id="text" required minlength="10" maxlength="1000"></textarea>
+  </label>
+
+  <details id="logs-field" hidden>
+    <summary>Add error logs (optional, but they help)</summary>
+    <textarea id="logs" maxlength="20000" placeholder="Paste here"></textarea>
+    <small class="hint">In Valenced's plugin list, tap the plugin, then <b>Errors</b> to copy them. Check for anything private before you send.</small>
+  </details>
+
+  <label>Your Discord username <small>(optional, so I can reply)</small>
     <input id="contact" type="text" maxlength="64" autocomplete="off">
   </label>
 
@@ -89,98 +99,55 @@
   <p id="error" hidden></p>
 </form>
 
-<p><small>Plugins that aren't out yet can't take reports or requests here: vote for them on <a href="coming.html">Coming next</a> instead.</small></p>
-
 <script>
   const API = "https://votes.bleel.workers.dev";
-  const form = document.getElementById("form");
-  const plugin = document.getElementById("plugin");
-  const text = document.getElementById("text");
-  const contact = document.getElementById("contact");
-  const send = document.getElementById("send");
-  const done = document.getElementById("done");
-  const error = document.getElementById("error");
-  const count = document.getElementById("count");
-  const textLabel = document.getElementById("text-label");
-  const bugFields = document.getElementById("bug-fields");
-  const android = document.getElementById("android");
-  const pluginField = document.getElementById("plugin-field");
-  const logs = document.getElementById("logs");
-  const logfile = document.getElementById("logfile");
-  const logfileNote = document.getElementById("logfile-note");
-  const LOGS_MAX = 20000;
-
-  // A log file is read here and put in the box, so it can be checked before it's sent.
-  // Too long: the newest part is kept (the end, where the error usually is), from a whole line.
-  logfile.onchange = async () => {
-    const file = logfile.files?.[0];
-    logfileNote.hidden = true;
-    if (!file) return;
-    try {
-      let content = (await file.text()).replace(/\r\n/g, "\n");
-      if (content.length > LOGS_MAX) {
-        content = content.slice(content.length - LOGS_MAX);
-        content = content.slice(content.indexOf("\n") + 1);
-        logfileNote.textContent = `That file is long, so only its last ${content.split("\n").length} lines are kept. Check them before you send.`;
-      } else {
-        logfileNote.textContent = `${file.name} added below. Check it for anything private before you send.`;
-      }
-      logs.value = content;
-    } catch {
-      logfileNote.textContent = "That file couldn't be read. Try pasting the lines instead.";
-    }
-    logfileNote.hidden = false;
-  };
+  const $ = id => document.getElementById(id);
+  const form = $("form"), plugin = $("plugin"), text = $("text"), contact = $("contact");
+  const send = $("send"), done = $("done"), error = $("error"), count = $("count");
+  const textLabel = $("text-label"), brokenField = $("broken-field"), broken = $("broken");
+  const logsField = $("logs-field"), logs = $("logs");
   let counts = {};
 
-  const kind = () => form.querySelector('input[name="kind"]:checked')?.value;
+  const isUpcoming = () => plugin.selectedOptions[0]?.parentElement?.hasAttribute("data-upcoming");
+  const isLive = () => plugin.value && plugin.value !== "new" && !isUpcoming();
+  // Only plugins that are out can be broken; "new" is an idea for a plugin that doesn't exist.
+  const kind = () => plugin.value === "new" ? "idea" : isLive() && broken.checked ? "bug" : "request";
+  const name = () => plugin.selectedOptions[0]?.text ?? "it";
 
-  // A bug asks for the steps, the Android version and logs; a request for what the plugin should
-  // do; an idea is for a plugin that doesn't exist yet, so it has no plugin to pick.
   const PROMPTS = {
-    bug: ["What went wrong?", "What you did, step by step, what happened, and what you expected instead."],
-    request: ["What should it do?", "What you want, and when you'd use it. A sentence or two is plenty."],
-    idea: ["What would the plugin do?", "What it does and when you'd use it. A name for it too, if you have one."],
+    bug: ["What went wrong?", "What you did, what happened, and what you expected."],
+    request: ["What would you like?", "What it should do, and when you'd use it. A sentence or two is plenty."],
+    idea: ["What would the plugin do?", "What it does and when you'd use it."],
   };
-  function showKind() {
-    const k = kind() ?? "request";
-    bugFields.hidden = k !== "bug";
-    android.required = k === "bug";
-    pluginField.hidden = k === "idea";
-    plugin.required = k !== "idea";
-    [textLabel.textContent, text.placeholder] = PROMPTS[k];
-    showCount();
-  }
-  for (const radio of form.querySelectorAll('input[name="kind"]')) radio.onchange = showKind;
 
-  const name = () => plugin.options[plugin.selectedIndex]?.text ?? "it";
-
-  function showCount() {
+  function update() {
+    brokenField.hidden = !isLive();
+    logsField.hidden = kind() !== "bug";
+    [textLabel.textContent, text.placeholder] = PROMPTS[kind()];
     const n = counts[plugin.value];
-    count.textContent = kind() === "request" && plugin.value && n ? `${n} request${n === 1 ? "" : "s"} for ${name()} so far` : "";
+    count.textContent = kind() === "request" && n ? `${n} request${n === 1 ? "" : "s"} for ${name()} so far` : "";
   }
-  plugin.onchange = showCount;
+  plugin.onchange = update;
+  broken.onchange = update;
+  update();
 
-  fetch(`${API}/request-counts`)
-    .then(r => r.json())
-    .then(c => { counts = c; showCount(); })
-    .catch(() => {});
+  fetch(`${API}/request-counts`).then(r => r.json()).then(c => { counts = c; update(); }).catch(() => {});
 
   form.onsubmit = async e => {
     e.preventDefault();
-    done.hidden = true;
-    error.hidden = true;
+    done.hidden = error.hidden = true;
     send.disabled = true;
+    const k = kind();
     try {
       const r = await fetch(`${API}/request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          kind: kind(),
-          ...(kind() === "idea" ? {} : { plugin: plugin.value }),
+          kind: k,
+          ...(k === "idea" ? {} : { plugin: plugin.value }),
           text: text.value,
           contact: contact.value,
-          ...(kind() === "bug" ? { android: android.value, logs: logs.value } : {}),
+          ...(k === "bug" ? { logs: logs.value } : {}),
         }),
       });
       const body = await r.json();
@@ -191,20 +158,14 @@
         error.hidden = false;
         return;
       }
-      if (kind() === "bug") {
-        done.textContent = `Sent. Thanks! I'll look into it${contact.value ? " and message you if I need more" : ""}.`;
-        logs.value = "";
-        logfile.value = "";
-        logfileNote.hidden = true;
-      } else if (kind() === "idea") {
-        done.textContent = `Sent. Thanks for the idea!${contact.value ? " I'll message you if I pick it up." : ""}`;
-      } else {
-        counts[plugin.value] = body.count;
-        done.textContent = `Sent. Thanks! That's request ${body.count} for ${name()}.`;
-      }
+      if (k === "request") counts[plugin.value] = body.count;
+      done.textContent = k === "bug" ? `Sent. Thanks! I'll look into it${contact.value ? " and message you if I need more" : ""}.`
+        : k === "idea" ? "Sent. Thanks for the idea!"
+        : `Sent. Thanks! That's request ${body.count} for ${name()}.`;
       done.hidden = false;
-      text.value = "";
-      showCount();
+      text.value = logs.value = "";
+      broken.checked = false;
+      update();
     } catch {
       error.textContent = "That didn't go through. Try again in a moment.";
       error.hidden = false;
